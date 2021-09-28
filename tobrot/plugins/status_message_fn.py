@@ -95,11 +95,11 @@ async def status_message_f(
 
         ms_g = (
             f"<b>Bot Uptime</b>: <code>{hr} : {mi} : {se}</code>\n"
-            f"<b>T:</b> <code>{total}</code> <b>U:</b> <code>{used}</code> <b>F:</b> <code>{free}</code>\n"
-            f"<b>RAM:</b> <code>{ram}%</code> <b>CPU:</b> <code>{cpu}%</code>\n"
+            f"<b>Free Space:</b> <code>{free}</code>\n"
+            f"<b>RAM:</b> <code>{ram}%</code> | <b>CPU:</b> <code>{cpu}%</code>\n"
         )
         if msg == "":
-            msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
+            msg = "🤷‍♂️ No Active Tasks"
             msg = ms_g + "\n" + msg
             await to_edit.edit(msg)
             break
@@ -279,7 +279,7 @@ def up_time(time_taken):
 async def upload_log_file(client, message):
     g = await AdminCheck(client, message.chat.id, message.from_user.id)
     if g:
-        await message.reply_document("Torrentleech-Gdrive.txt")
+        await message.reply_document("leech1bot.txt")
 
 async def upload_as_doc(client, message):
     user_specific_config[message.from_user.id]=UserDynaConfig(message.from_user.id,True)
