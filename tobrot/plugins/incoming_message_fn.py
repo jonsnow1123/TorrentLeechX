@@ -54,7 +54,7 @@ async def incoming_message_f(client, message):
     user_command = message.command[0]
     g_id = message.from_user.id
     credit = await message.reply_text(
-        f"🧲 Leeching for you <a href='tg://user?id={g_id}'>🤕</a>", parse_mode="html"
+        f"🧲 Leeching for <a href='tg://user?id={g_id}'>{message.from_user.first_name}</a>", parse_mode="html"
     )
     # get link from the incoming message
     i_m_sefg = await message.reply_text("processing...", quote=True)
@@ -73,7 +73,7 @@ async def incoming_message_f(client, message):
             LOGGER.info(cf_name)
         else:
             if user_command == LEECH_COMMAND.lower():
-                await i_m_sefg.edit("No downloading source provided 🙄")
+                await i_m_sefg.edit("No downloading source provided")
                 return
             is_file = True
             dl_url = rep_mess
@@ -82,7 +82,7 @@ async def incoming_message_f(client, message):
         LOGGER.info(dl_url)
 
     else:
-        await i_m_sefg.edit("👺𝙉𝙤 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 𝙨𝙤𝙪𝙧𝙘𝙚 𝙥𝙧𝙤𝙫𝙞𝙙𝙚𝙙👺")
+        await i_m_sefg.edit("𝙉𝙤 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 𝙨𝙤𝙪𝙧𝙘𝙚 𝙥𝙧𝙤𝙫𝙞𝙙𝙚𝙙")
         return
     if dl_url is not None:
 
@@ -101,7 +101,7 @@ async def incoming_message_f(client, message):
             aria_i_p = await aria_start()
             # LOGGER.info(aria_i_p)
 
-        await i_m_sefg.edit_text("Added to downloads. Send /status")
+        await i_m_sefg.edit_text("Added to downloads. Send /status_1")
         # try to download the "link"
         is_zip = False
         is_cloud = False
@@ -147,7 +147,7 @@ async def incoming_youtube_dl_f(client, message):
     """ /ytdl command """
     current_user_id = message.from_user.id
     credit = await message.reply_text(
-        f"💀 Downloading for you <a href='tg://user?id={current_user_id}'>🤕</a>",
+        f"Downloading for <a href='tg://user?id={current_user_id}'>{message.from_user.first_name}</a>",
         parse_mode="html",
     )
     i_m_sefg = await message.reply_text("processing...", quote=True)
@@ -223,7 +223,7 @@ async def g_yt_playlist(client, message):
         return
     if "youtube.com/playlist" in url:
         i_m_sefg = await message.reply_text(
-            f"💀 Downloading for you <a href='tg://user?id={usr_id}'>🤗</a>",
+            f"Downloading for <a href='tg://user?id={current_user_id}'>{message.from_user.first_name}</a>",
             parse_mode="html",
         )
         await yt_playlist_downg(message, i_m_sefg, client, is_cloud)
@@ -294,7 +294,7 @@ async def rename_tg_file(client, message):
                 message_to_send += "\n"
             if message_to_send != "":
                 mention_req_user = (
-                    f"<a href='tg://user?id={usr_id}'>Your Requested Files</a>\n\n"
+                    f"<a href='tg://user?id={usr_id}'>{message.from_user.first_name}</a>, Your Requested Files\n\n"
                 )
                 message_to_send = mention_req_user + message_to_send
                 message_to_send = message_to_send + "\n\n" + "#uploads"
